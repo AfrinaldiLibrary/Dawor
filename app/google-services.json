@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "580338761547",
+    "project_id": "dawor-app",
+    "storage_bucket": "dawor-app.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:580338761547:android:a20f5060f364dc7bcb72ce",
+        "android_client_info": {
+          "package_name": "com.afrinaldi.dawor"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "580338761547-545lkf806d7tm2bsta8d5dtodju2olgf.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBCBI-R9qKjxlcYvep5iSBk2MFC0_C2-50"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "580338761547-545lkf806d7tm2bsta8d5dtodju2olgf.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

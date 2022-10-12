@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">Dawor</string>
+    <string name="email">Email</string>
+    <string name="password">Password</string>
+    <string name="sign_in">Sign In</string>
+    <string name="sign_up">Sign Up</string>
+    <string name="create_account">CREATE ACCOUNT</string>
+    <string name="name">Name</string>
+    <string name="daftar_peserta">Daftar Peserta</string>
+    <string name="daftar_kegiatan">Daftar Kegiatan</string>
+    <string name="tanggal">Tanggal</string>
+</resources>
