@@ -20,8 +20,10 @@ class AgendaAdapter (private val data: List<AgendaModel>, private val listener: 
     override fun getItemCount(): Int = data.size
 
     inner class ViewHolder(private val binding: ItemAgendaBinding) : RecyclerView.ViewHolder(binding.root){
+        lateinit var getAgenda: AgendaModel
         @SuppressLint("SetTextI18n")
         fun bind(item : AgendaModel, listener: (AgendaModel) -> Unit){
+            getAgenda = item
             binding.tvAgenda.text = item.title
             binding.tvStart.text = "${item.startTime} - "
             binding.tvEnd.text = item.endTime

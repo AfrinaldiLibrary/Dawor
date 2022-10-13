@@ -21,6 +21,20 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
+        android:id="@+id/tv_delete"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:drawablePadding="8dp"
+        android:fontFamily="@font/inter_regular"
+        android:text="@string/delete"
+        android:textColor="@android:color/holo_red_dark"
+        app:drawableStartCompat="@drawable/ic_delete"
+        app:layout_constraintBottom_toBottomOf="@+id/tv_agenda_name"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/tv_agenda_name" />
+
+    <TextView
         android:id="@+id/tv_date"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

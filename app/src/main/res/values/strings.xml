@@ -15,4 +15,7 @@
     <string name="done"> Selesai?</string>
     <string name="add_agenda">Tambah Agenda</string>
     <string name="sign_out">Sign Out</string>
+    <string name="delete">Hapus</string>
+    <string name="are_you_sure">Yakin hapus?</string>
+    <string name="yes">YA</string>
 </resources>

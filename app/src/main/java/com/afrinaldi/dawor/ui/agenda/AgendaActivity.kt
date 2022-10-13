@@ -4,6 +4,8 @@ import android.annotation.SuppressLint
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
+import androidx.recyclerview.widget.ItemTouchHelper
+import androidx.recyclerview.widget.RecyclerView
 import com.afrinaldi.dawor.databinding.ActivityAgendaBinding
 import com.afrinaldi.dawor.ui.adapter.AgendaAdapter
 import com.afrinaldi.dawor.ui.helper.*
@@ -25,6 +27,7 @@ class AgendaActivity : AppCompatActivity() {
     private val listAgenda = ArrayList<AgendaModel>()
     private lateinit var db: FirebaseDatabase
     private lateinit var prefHelper: PrefHelper
+    private var name : String? = null
 
     private var agendaModel = AgendaModel()
 
@@ -41,25 +44,36 @@ class AgendaActivity : AppCompatActivity() {
         val dateNow = LocalDateTime.now().format(formatter)
         binding.tvDate.text = dateNow
 
-        val name = intent.getStringExtra(NAME)
+        name = intent.getStringExtra(NAME)
         binding.tvAgendaName.text = "Daftar Kegiatan - $name"
 
         readData(name!!)
+        initAction()
 
         binding.fab.setOnClickListener{
             AddAgendaDialog(listener = {agenda, time ->
-                addData(agenda, time, name)
-            }).show(supportFragmentManager, "tag")
+                addData(agenda, time)
+            }).show(supportFragmentManager, "add")
+        }
+
+        binding.tvDelete.setOnClickListener {
+            DeleteParticipantDialog(listener = { _ ->
+                val profRef = db.reference.child("Profile")
+                val currentDb = profRef.child(prefHelper.getString(PREF_TOKEN)!!)
+                val nameRef = currentDb.child("Participant").child(name!!)
+                nameRef.removeValue()
+                finish()
+            }).show(supportFragmentManager, "delete")
         }
     }
 
-    private fun addData(agenda: String, time: String, name: String) {
+    private fun addData(agenda: String, time: String) {
         agendaModel.title = agenda
         agendaModel.startTime = time
 
         val profRef = db.reference.child("Profile")
         val currentDb = profRef.child(prefHelper.getString(PREF_TOKEN)!!)
-        val nameRef = currentDb.child("Participant").child(name)
+        val nameRef = currentDb.child("Participant").child(name!!)
 
         nameRef.child("Agenda").child(agenda).setValue(agendaModel)
 
@@ -94,5 +108,41 @@ class AgendaActivity : AppCompatActivity() {
                 Toast.makeText(this@AgendaActivity, error.message, Toast.LENGTH_LONG).show()
             }
         })
+    }
+
+    private fun initAction() {
+        val itemTouchHelper = ItemTouchHelper(object : ItemTouchHelper.Callback() {
+            override fun getMovementFlags(
+                recyclerView: RecyclerView,
+                viewHolder: RecyclerView.ViewHolder
+            ): Int {
+                return makeMovementFlags(0, ItemTouchHelper.LEFT)
+            }
+
+            override fun onMove(
+                recyclerView: RecyclerView,
+                viewHolder: RecyclerView.ViewHolder,
+                target: RecyclerView.ViewHolder
+            ): Boolean {
+                return false
+            }
+
+            override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
+                val agenda = (viewHolder as AgendaAdapter.ViewHolder).getAgenda
+                deleteAgenda(agenda.title!!)
+            }
+
+        })
+        itemTouchHelper.attachToRecyclerView(binding.rvListParticipant)
+    }
+
+    private fun deleteAgenda(title: String){
+        val profRef = db.reference.child("Profile")
+        val currentDb = profRef.child(prefHelper.getString(PREF_TOKEN)!!)
+        val nameRef = currentDb.child("Participant").child(name!!)
+        val agendaRef = nameRef.child("Agenda")
+
+        agendaRef.child(title).removeValue()
+        Toast.makeText(this@AgendaActivity, "$title dihapus", Toast.LENGTH_SHORT).show()
     }
 }

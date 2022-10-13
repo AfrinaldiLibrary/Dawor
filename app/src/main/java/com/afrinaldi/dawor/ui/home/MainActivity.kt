@@ -83,12 +83,15 @@ class MainActivity : AppCompatActivity() {
                 }
 
                 if (listParticipant.isNotEmpty()){
+                    binding.rvListParticipant.visibility = View.VISIBLE
                     binding.rvListParticipant.adapter = ParticipantAdapter(listParticipant) {data ->
                         Intent(this@MainActivity, AgendaActivity::class.java).also {
                             it.putExtra(NAME, data.name)
                             startActivity(it)
                         }
                     }
+                } else {
+                    binding.rvListParticipant.visibility = View.INVISIBLE
                 }
             }
 
