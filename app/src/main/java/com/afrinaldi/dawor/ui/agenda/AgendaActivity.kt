@@ -62,6 +62,7 @@ class AgendaActivity : AppCompatActivity() {
                 val currentDb = profRef.child(prefHelper.getString(PREF_TOKEN)!!)
                 val nameRef = currentDb.child("Participant").child(name!!)
                 nameRef.removeValue()
+                Toast.makeText(this, "$name dihapus", Toast.LENGTH_SHORT).show()
                 finish()
             }).show(supportFragmentManager, "delete")
         }
