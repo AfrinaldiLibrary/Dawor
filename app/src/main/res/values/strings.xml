@@ -9,4 +9,10 @@
     <string name="daftar_peserta">Daftar Peserta</string>
     <string name="daftar_kegiatan">Daftar Kegiatan</string>
     <string name="tanggal">Tanggal</string>
+    <string name="tambah_peserta">Tambah Peserta</string>
+    <string name="kegiatan">Kegiatan</string>
+    <string name="save">Simpan</string>
+    <string name="done"> Selesai?</string>
+    <string name="add_agenda">Tambah Agenda</string>
+    <string name="sign_out">Sign Out</string>
 </resources>
